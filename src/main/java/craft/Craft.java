@@ -29,7 +29,7 @@ class MyWebMvcConfigurer implements WebMvcConfigurer {
 	}
 
 	private void log(Object... args) {
-		// new LogHelper(this).log(args);
+		new LogHelper(this).log(args);
 	}
 }
 
