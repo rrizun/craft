@@ -32,6 +32,7 @@ public class CraftPort {
     this.service = service;
   }
 
+  // GET /hello?name={name}
   @GetMapping("/hello")
   public HelloResponse hello(@RequestParam String name) {
     return new HelloResponse(service.hello(name));
