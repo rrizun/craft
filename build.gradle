@@ -10,7 +10,7 @@ targetCompatibility = 1.8
 
 repositories {
 	jcenter()
-	mavenCentral()
+	// mavenCentral()
 }
 
 dependencies {
@@ -19,6 +19,7 @@ dependencies {
 	implementation "org.apache.avro:avro:+"
   implementation "org.mariadb.jdbc:mariadb-java-client:+"
 	implementation "org.springframework.boot:spring-boot-starter-web"
+  implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation "org.springframework.boot:spring-boot-starter-security"
 }
 
