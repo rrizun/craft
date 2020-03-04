@@ -1,5 +1,10 @@
 package craft.ports;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.google.gson.JsonObject;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,11 +19,20 @@ class HelloResponse {
   }
 }
 
-class NowResponse {
-  public final String now;
+// playerID,birthYear,
+// birthMonth,birthDay,birthCountry,birthState,birthCity,
+// deathYear,deathMonth,deathDay,deathCountry,deathState,deathCity,
+// nameFirst,nameLast,nameGiven,weight,height,bats,throws,debut,finalGame,retroID,bbrefID
 
-  NowResponse(String now) {
-    this.now = now;
+class Player {
+  public String playerID;
+}
+
+class GetPlayersResponse {
+  public final List<JsonObject> players = new ArrayList<>();
+
+  GetPlayersResponse(List<JsonObject> players) {
+    this.players.addAll(players);
   }
 }
 /**
@@ -45,4 +59,10 @@ public class ClientPort {
     return new HelloResponse(service.hello(name));
   }
 
+    // GET /api/players
+    @GetMapping("/api/players")
+    public GetPlayersResponse players() throws Exception {
+      return new GetPlayersResponse(service.getPlayers());
+    }
+  
 }
