@@ -26,7 +26,7 @@ class NowResponse {
  * 
  */
 @RestController
-public class CraftPort {
+public class ClientPort {
 
   private final CraftService service;
 
@@ -35,7 +35,7 @@ public class CraftPort {
    * 
    * @param service
    */
-  public CraftPort(CraftService service) {
+  public ClientPort(CraftService service) {
     this.service = service;
   }
 
