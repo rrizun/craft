@@ -1,5 +1,7 @@
 package craft.service;
 
+import com.google.gson.annotations.SerializedName;
+
 // playerID,birthYear,
 // birthMonth,birthDay,birthCountry,birthState,birthCity,
 // deathYear,deathMonth,deathDay,deathCountry,deathState,deathCity,
@@ -51,7 +53,10 @@ public class Player {
     public String weight;//": "190",
     public String height;//": "75",
     public String bats;//": "R",
+
+    @SerializedName("throws")
     public String _throws;//": "R",
+    
     public String debut;//": "2015-09-04",
     public String finalGame;//": "2017-08-19",
     public String retroID;//": "zycht001",
