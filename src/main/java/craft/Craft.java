@@ -27,7 +27,7 @@ class MyWebMvcConfigurer implements WebMvcConfigurer {
     converters.clear();
     converters.add(new FormHttpMessageConverter());
     converters.add(new ResourceHttpMessageConverter());
-    converters.add(new GsonHttpMessageConverter(new GsonBuilder().setPrettyPrinting().create()));
+    converters.add(new GsonHttpMessageConverter(new GsonBuilder().setPrettyPrinting().serializeNulls().create()));
 	}
 
 	private void log(Object... args) {
