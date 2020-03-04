@@ -1,12 +1,12 @@
 package craft.service;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.io.Files;
+import com.google.common.base.Strings;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import org.springframework.core.io.ClassPathResource;
@@ -18,20 +18,31 @@ import helpers.LogHelper;
 @Service
 public class CraftService {
 
+  // ctor
   public CraftService() {
   }
 
-  public String hello(String name) {
-    log("hello", name);
-    return String.format("Hello, %s!", name);
-  }
+  // /**
+  //  * returns all players
+  //  */
+  // public List<JsonObject> getPlayers() throws Exception {
+  //   return players();
+  // }
 
-  public List<JsonObject> getPlayers() throws Exception {
-    return players();
+  public List<Player> getPlayers() throws Exception {
+    List<Player> players = new ArrayList<>();
+    
+    // convert from type unsafe json object to type safe java pojo
+    for (JsonObject player : players()) {
+      players.add(new Gson().fromJson(player, Player.class));
+    }
+
+    return players;
   }
 
   /**
    * get player by player ID
+   * 
    * @param playerID
    * @return the player for the given playerID or null if not found
    * @throws Exception
@@ -48,7 +59,6 @@ public class CraftService {
     List<JsonObject> players = new ArrayList<>();
 
     Resource resource = new ClassPathResource("People.csv");
-
     final BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream()));
     try {
       String line;
@@ -61,12 +71,16 @@ public class CraftService {
           for (String name : line.split(","))
             names.add(name);
         } else {
-          int index = 0;
+          int index = -1;
           JsonObject player = new JsonObject();
 
           for (String value : line.split(",")) {
-            if (index < names.size())
-              player.addProperty(names.get(index++), value);
+            ++index;
+            if (index < names.size()) {
+              // discard null or empty values
+              if (Strings.nullToEmpty(value).length()>0)
+                player.addProperty(names.get(index), value);
+            }
           }
 
           players.add(player);
@@ -75,8 +89,8 @@ public class CraftService {
     } finally {
       reader.close();
     }
-    return players;
 
+    return players;
   }
 
   private void log(Object... args) {
