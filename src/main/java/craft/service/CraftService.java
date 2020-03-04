@@ -22,13 +22,9 @@ public class CraftService {
   public CraftService() {
   }
 
-  // /**
-  //  * returns all players
-  //  */
-  // public List<JsonObject> getPlayers() throws Exception {
-  //   return players();
-  // }
-
+  /**
+   * returns all players
+   */
   public List<Player> getPlayers() throws Exception {
     List<Player> players = new ArrayList<>();
     
@@ -47,9 +43,11 @@ public class CraftService {
    * @return the player for the given playerID or null if not found
    * @throws Exception
    */
-  public JsonObject getPlayer(String playerID) throws Exception {
-    for (JsonObject player : players()) {
-      if (player.get("playerID").getAsString().equals(playerID))
+  public Player getPlayer(String playerID) throws Exception {
+    for (JsonObject raw : players()) {
+      Player player = new Gson().fromJson(raw, Player.class);
+
+      if (player.playerID.equals(playerID))
         return player;
     }
     return null;
