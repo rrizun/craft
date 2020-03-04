@@ -45,16 +45,4 @@ public class ClientPort {
     return new HelloResponse(service.hello(name));
   }
 
-  // GET /now
-  @GetMapping("/now")
-  public NowResponse now() throws Exception {
-    return new NowResponse(service.now());
-  }
-
-  // // GET /users
-  // @GetMapping("/users")
-  // public Object users() {
-  // return service.users();
-  // }
-
 }
