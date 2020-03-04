@@ -27,6 +27,24 @@ public class CraftService {
   }
 
   public List<JsonObject> getPlayers() throws Exception {
+    return players();
+  }
+
+  /**
+   * get player by player ID
+   * @param playerID
+   * @return the player for the given playerID or null if not found
+   * @throws Exception
+   */
+  public JsonObject getPlayer(String playerID) throws Exception {
+    for (JsonObject player : players()) {
+      if (player.get("playerID").getAsString().equals(playerID))
+        return player;
+    }
+    return null;
+  }
+
+  private List<JsonObject> players() throws Exception {
     List<JsonObject> players = new ArrayList<>();
 
     Resource resource = new ClassPathResource("People.csv");
@@ -58,6 +76,7 @@ public class CraftService {
       reader.close();
     }
     return players;
+
   }
 
   private void log(Object... args) {
