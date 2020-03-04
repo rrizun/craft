@@ -4,8 +4,8 @@ import javax.sql.DataSource;
 
 import org.springframework.stereotype.Service;
 
-import craft.JdbcHelper;
-import craft.LogHelper;
+import helpers.JdbcHelper;
+import helpers.LogHelper;
 
 @Service
 public class CraftService {

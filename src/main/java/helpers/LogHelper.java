@@ -1,4 +1,4 @@
-package craft;
+package helpers;
 
 import java.util.*;
 

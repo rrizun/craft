@@ -13,6 +13,8 @@ import org.springframework.http.converter.ResourceHttpMessageConverter;
 import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import helpers.LogHelper;
+
 @Configuration
 class MyWebMvcConfigurer implements WebMvcConfigurer {
 	public MyWebMvcConfigurer() {
@@ -29,7 +31,7 @@ class MyWebMvcConfigurer implements WebMvcConfigurer {
 	}
 
 	private void log(Object... args) {
-		new LogHelper(this).log(args);
+    new LogHelper(this).log(args);
 	}
 }
 
