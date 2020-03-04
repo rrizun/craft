@@ -34,8 +34,25 @@ public class CraftService {
     final BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream()));
     try {
       String line;
+      boolean once = true;
+      List<String> names = new ArrayList<>();
       while ((line = reader.readLine()) != null) {
-        log(line);
+        // log(line);
+        if (once) {
+          once = false;
+          for (String name : line.split(","))
+            names.add(name);
+        } else {
+          int index = 0;
+          JsonObject player = new JsonObject();
+
+          for (String value : line.split(",")) {
+            if (index < names.size())
+              player.addProperty(names.get(index++), value);
+          }
+
+          players.add(player);
+        }
       }
     } finally {
       reader.close();
