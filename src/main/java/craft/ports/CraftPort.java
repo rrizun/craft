@@ -14,6 +14,13 @@ class HelloResponse {
   }
 }
 
+class NowResponse {
+  public final String now;
+
+  NowResponse(String now) {
+    this.now = now;
+  }
+}
 /**
  * CraftPort
  * 
@@ -40,8 +47,8 @@ public class CraftPort {
 
   // GET /now
   @GetMapping("/now")
-  public String now() throws Exception {
-    return service.now();
+  public NowResponse now() throws Exception {
+    return new NowResponse(service.now());
   }
 
   // // GET /users
